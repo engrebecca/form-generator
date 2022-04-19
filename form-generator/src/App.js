@@ -1,7 +1,8 @@
+import FormInput from "./components/FormInput";
 import "./App.css";
 
 function App() {
-  const sampleData = [
+  const sampleFormData = [
     {
       tag: "input",
       name: "first_name",
@@ -62,6 +63,14 @@ function App() {
         <h1>Form Generator</h1>
         <p>A generator that dynamically creates forms from JSON</p>
       </header>
+
+      <main>
+        {sampleFormData.map((formItem) => {
+          // Assuming all form items in provided JSON will be an input element.
+          // In the future a conditional can be added here to allow for additional types of form elements and components.
+          return <FormInput formItem={formItem} key={formItem.name} />;
+        })}
+      </main>
     </div>
   );
 }

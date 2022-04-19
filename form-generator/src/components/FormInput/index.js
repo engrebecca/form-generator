@@ -1,5 +1,5 @@
 import React from "react";
-import { Input } from "antd";
+import { Input, Form } from "antd";
 
 function FormInput({ formItem }) {
   const name = formItem.name;
@@ -7,10 +7,9 @@ function FormInput({ formItem }) {
   const label = formItem.human_label;
 
   return (
-    <div>
-      <label for={name}>{label}</label>
+    <Form.Item label={label} name={name}>
       <Input type={type} name={name} id={name} />
-    </div>
+    </Form.Item>
   );
 }
 

@@ -1,7 +1,23 @@
+import { Form, Button } from "antd";
 import FormInput from "./components/FormInput";
 import "./App.css";
 
 function App() {
+  const [formRef] = Form.useForm();
+
+  function onValuesChange(changedValues, allValues) {
+    console.log(changedValues);
+    console.log(allValues);
+  }
+
+  const onFinish = (values) => {
+    console.log("Success:", values);
+  };
+
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
+  };
+
   const sampleFormData = [
     {
       tag: "input",
@@ -64,13 +80,24 @@ function App() {
         <p>A generator that dynamically creates forms from JSON</p>
       </header>
 
-      <main>
+      <Form
+        form={formRef}
+        onValuesChange={onValuesChange}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+      >
         {sampleFormData.map((formItem) => {
           // Assuming all form items in provided JSON will be an input element.
           // In the future a conditional can be added here to allow for additional types of form elements and components.
           return <FormInput formItem={formItem} key={formItem.name} />;
         })}
-      </main>
+
+        <Form.Item>
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
+        </Form.Item>
+      </Form>
     </div>
   );
 }

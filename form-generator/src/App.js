@@ -1,22 +1,59 @@
+import { useEffect, useState } from "react";
 import { Form, Button } from "antd";
 import FormInput from "./components/FormInput";
 import "./App.css";
 
 function App() {
   const [formRef] = Form.useForm();
+  const [formFields, setFormFields] = useState([]);
+  const [conditionalFields, setConditionalFields] = useState([]);
 
-  function onValuesChange(changedValues, allValues) {
-    console.log(changedValues);
-    console.log(allValues);
+  useEffect(() => {
+    getFieldsToRender();
+    // eslint-disable-next-line
+  }, []);
+
+  function getFieldsToRender() {
+    const fieldsToRender = [];
+    const conditionalFields = [];
+
+    sampleFormData.forEach((formField) => {
+      if (!formField.conditional) {
+        fieldsToRender.push(formField);
+      } else if (formField.conditional) {
+        conditionalFields.push(formField);
+
+        // If field is conditional, check if it should be rendered
+        const valueToCheck = formRef.getFieldValue(formField.conditional.name);
+        const isToRender = formField.conditional.show_if(valueToCheck);
+        if (isToRender) {
+          fieldsToRender.push(formField);
+        }
+      }
+    });
+
+    setFormFields(fieldsToRender);
+    setConditionalFields(conditionalFields);
   }
 
-  const onFinish = (values) => {
-    console.log("Success:", values);
-  };
+  function onValuesChange(changedValues) {
+    const changedField = Object.keys(changedValues)[0];
 
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
+    // If changed field is conditional, check if it should be rendered based on change
+    conditionalFields.forEach((conditionalField) => {
+      if (conditionalField.conditional.name === changedField) {
+        getFieldsToRender();
+      }
+    });
+  }
+
+  function onFinish(values) {
+    console.log(values);
+  }
+
+  function onFinishFailed(errorInfo) {
+    console.log(errorInfo);
+  }
 
   const sampleFormData = [
     {
@@ -86,10 +123,10 @@ function App() {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
       >
-        {sampleFormData.map((formItem) => {
+        {formFields.map((formField) => {
           // Assuming all form items in provided JSON will be an input element.
-          // In the future a conditional can be added here to allow for additional types of form elements and components.
-          return <FormInput formItem={formItem} key={formItem.name} />;
+          // In the future a conditional can be added here to return different components based on element type.
+          return <FormInput formField={formField} key={formField.name} />;
         })}
 
         <Form.Item>

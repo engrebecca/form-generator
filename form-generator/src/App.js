@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Form, Button } from "antd";
 import FormInput from "./components/FormInput";
+import FormCheckbox from "./components/FormCheckbox";
 import "./App.css";
 
 function App() {
@@ -124,9 +125,16 @@ function App() {
         onFinishFailed={onFinishFailed}
       >
         {formFields.map((formField) => {
-          // Assuming all form items in provided JSON will be an input element.
-          // In the future a conditional can be added here to return different components based on element type.
-          return <FormInput formField={formField} key={formField.name} />;
+          const fieldType = formField.type;
+          const fieldName = formField.name;
+
+          if (fieldType === "checkbox") {
+            return <FormCheckbox formField={formField} key={fieldName} />;
+          } else {
+            // Assuming all other form items in provided JSON will be an input element.
+            // Conditional can be updated in future to allow for different components based on element type.
+            return <FormInput formField={formField} key={fieldName} />;
+          }
         })}
 
         <Form.Item>

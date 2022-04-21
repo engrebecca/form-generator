@@ -44,9 +44,15 @@ function App() {
   }
 
   function onValuesChange(changedValues) {
-    const changedField = Object.keys(changedValues)[0];
+    // If a previous form was submitted, clear confirmation message and get fields to render again
+    if (isSubmitted) {
+      setIsSubmitted(false);
+      getFieldsToRender();
+    }
 
     // If changed field is conditional, check if it should be rendered based on change
+    const changedField = Object.keys(changedValues)[0];
+
     conditionalFields.forEach((conditionalField) => {
       if (conditionalField.conditional.name === changedField) {
         getFieldsToRender();
@@ -61,6 +67,7 @@ function App() {
     setTimeout(() => {
       setIsLoading(false);
       setIsSubmitted(true);
+      formRef.resetFields();
 
       // Console log form data on submit
       console.log(values);

@@ -47,3 +47,13 @@
   color: #3ed0da;
   margin-bottom: 10px;
 }
+
+.ant-form-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.ant-form-item-label {
+  width: 20%;
+}

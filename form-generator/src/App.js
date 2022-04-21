@@ -70,6 +70,7 @@ function App() {
         onValuesChange={onValuesChange}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
+        className="app-form"
       >
         {formFields.map((formField) => {
           const fieldType = formField.type;
@@ -85,7 +86,7 @@ function App() {
         })}
 
         <Form.Item>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" className="submit-button">
             Submit
           </Button>
         </Form.Item>

@@ -9,4 +9,32 @@
   background-color: #3ed0da;
   width: 100%;
   color: white;
+  margin-bottom: 30px;
+}
+
+.app-form {
+  border: solid;
+  border-color: black;
+  border-width: 5px;
+  border-radius: 4px;
+  width: 50%;
+  padding: 20px;
+}
+
+.form-item {
+  margin-bottom: 15px;
+}
+
+.submit-button {
+  font-size: 18px;
+  color: white;
+  background-color: #3ed0da;
+  border-color: #3ed0da;
+  border-radius: 4px;
+  width: 100px;
+  height: 40px;
+}
+
+.submit-button:hover {
+  opacity: 60%;
 }

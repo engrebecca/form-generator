@@ -7,7 +7,7 @@ function FormInput({ formField }) {
   const label = formField.human_label;
 
   return (
-    <Form.Item label={label} name={name}>
+    <Form.Item label={label} name={name} className="form-item">
       <Input type={type} name={name} id={name} />
     </Form.Item>
   );

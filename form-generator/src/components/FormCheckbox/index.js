@@ -6,7 +6,12 @@ function FormCheckbox({ formField }) {
   const label = formField.human_label;
 
   return (
-    <Form.Item label={label} name={name} valuePropName="checked">
+    <Form.Item
+      label={label}
+      name={name}
+      valuePropName="checked"
+      className="form-item"
+    >
       <Checkbox />
     </Form.Item>
   );

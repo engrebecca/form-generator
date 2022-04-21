@@ -11,6 +11,7 @@ function App() {
   const [formFields, setFormFields] = useState([]);
   const [conditionalFields, setConditionalFields] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const loadingIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
@@ -59,6 +60,7 @@ function App() {
     // Simulate time of an API request to submit form data
     setTimeout(() => {
       setIsLoading(false);
+      setIsSubmitted(true);
 
       // Console log form data on submit
       console.log(values);
@@ -96,7 +98,12 @@ function App() {
           }
         })}
 
-        {isLoading && <Spin indicator={loadingIcon} className="loading-spin" />}
+        <div className="app-feedback">
+          {isSubmitted && <p>Your information has been submitted!</p>}
+          {isLoading && (
+            <Spin indicator={loadingIcon} className="loading-spin" />
+          )}
+        </div>
 
         <Form.Item>
           <Button type="primary" htmlType="submit" className="submit-button">

@@ -12,6 +12,10 @@
   margin-bottom: 30px;
 }
 
+.app-feedback {
+  height: 40px;
+}
+
 .app-form {
   border: solid;
   border-color: black;

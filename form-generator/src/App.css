@@ -57,3 +57,8 @@
 .ant-form-item-label {
   width: 20%;
 }
+
+.ant-form-item-explain-error {
+  color: red;
+  font-size: 12px;
+}

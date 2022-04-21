@@ -7,7 +7,13 @@ function FormInput({ formField }) {
   const label = formField.human_label;
 
   return (
-    <Form.Item label={label} name={name} className="form-item">
+    <Form.Item
+      label={label}
+      name={name}
+      // Opportunity to set additional validation rules dynamically in future. Could use a conditional that references formField.name to set different rules.
+      rules={[{ required: true }]}
+      className="form-item"
+    >
       <Input type={type} name={name} id={name} />
     </Form.Item>
   );

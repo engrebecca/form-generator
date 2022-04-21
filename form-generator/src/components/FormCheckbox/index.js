@@ -9,6 +9,7 @@ function FormCheckbox({ formField }) {
     <Form.Item
       label={label}
       name={name}
+      rules={[{ required: true }]}
       valuePropName="checked"
       className="form-item"
     >

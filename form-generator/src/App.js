@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { Form, Button } from "antd";
+import { Form, Button, Spin } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 import FormInput from "./components/FormInput";
 import FormCheckbox from "./components/FormCheckbox";
 import sampleJSON from "./sampleJSON";
@@ -9,6 +10,9 @@ function App() {
   const [formRef] = Form.useForm();
   const [formFields, setFormFields] = useState([]);
   const [conditionalFields, setConditionalFields] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const loadingIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
   useEffect(() => {
     getFieldsToRender();
@@ -50,8 +54,15 @@ function App() {
   }
 
   function onFinish(values) {
-    // Console log form data on submit
-    console.log(values);
+    setIsLoading(true);
+
+    // Simulate time of an API request to submit form data
+    setTimeout(() => {
+      setIsLoading(false);
+
+      // Console log form data on submit
+      console.log(values);
+    }, 2000);
   }
 
   function onFinishFailed(errorInfo) {
@@ -84,6 +95,8 @@ function App() {
             return <FormInput formField={formField} key={fieldName} />;
           }
         })}
+
+        {isLoading && <Spin indicator={loadingIcon} className="loading-spin" />}
 
         <Form.Item>
           <Button type="primary" htmlType="submit" className="submit-button">

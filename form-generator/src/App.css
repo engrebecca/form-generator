@@ -38,3 +38,8 @@
 .submit-button:hover {
   opacity: 60%;
 }
+
+.loading-spin {
+  color: #3ed0da;
+  margin-bottom: 10px;
+}
